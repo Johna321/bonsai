@@ -11,5 +11,22 @@
       "StackId": "arn:aws:cloudformation:us-east-1:245240861480:stack/amplify-bonsai-dev-163237/a2d01de0-e9c5-11ec-822b-12760150d3d7",
       "AmplifyAppId": "d1nhaggv2cxpk1"
     }
+  },
+  "bonsaienv": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-bonsai-bonsaienv-120711-authRole",
+      "UnauthRoleArn": "arn:aws:iam::041080134333:role/amplify-bonsai-bonsaienv-120711-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::041080134333:role/amplify-bonsai-bonsaienv-120711-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-bonsai-bonsaienv-120711-deployment",
+      "UnauthRoleName": "amplify-bonsai-bonsaienv-120711-unauthRole",
+      "StackName": "amplify-bonsai-bonsaienv-120711",
+      "StackId": "arn:aws:cloudformation:us-east-1:041080134333:stack/amplify-bonsai-bonsaienv-120711/8c460fd0-ee57-11ec-aec7-1262e6868b8d"
+    },
+    "categories": {
+      "auth": {
+        "bonsaib9060c71": {}
+      }
+    }
   }
 }
