@@ -1,8 +1,10 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import { useUser } from '../context/AuthContext.tsx';
 
 export default function Home() {
-  return (
+    const { user } = useUser();
+    console.log("user: ", user);
+    return (
     <div>
       <Head>
         <title>Bonsai</title>
@@ -14,5 +16,5 @@ export default function Home() {
           Hello NextJS
       </main>
     </div>
-  )
+    )
 }

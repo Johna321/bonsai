@@ -1,0 +1,20 @@
+{
+  "bonsdev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-bonsai-bonsdev-170407-authRole",
+      "UnauthRoleArn": "arn:aws:iam::041080134333:role/amplify-bonsai-bonsdev-170407-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::041080134333:role/amplify-bonsai-bonsdev-170407-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-bonsai-bonsdev-170407-deployment",
+      "UnauthRoleName": "amplify-bonsai-bonsdev-170407-unauthRole",
+      "StackName": "amplify-bonsai-bonsdev-170407",
+      "StackId": "arn:aws:cloudformation:us-east-2:041080134333:stack/amplify-bonsai-bonsdev-170407/87410760-f0dc-11ec-9f56-06ca1d571e2e",
+      "AmplifyAppId": "d14001vnm55dr5"
+    },
+    "categories": {
+      "auth": {
+        "bonsai10c853bb": {}
+      }
+    }
+  }
+}
