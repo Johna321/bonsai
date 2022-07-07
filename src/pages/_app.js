@@ -11,11 +11,11 @@ Amplify.configure({ ...awsconfig, ssr: true });
 
 function MyApp({ Component, pageProps }) {
   return (
-      <React.Fragment>
+      <>
           <AuthContext>
             <Component {...pageProps} />
           </AuthContext>
-      </React.Fragment>
+      </>
   );
 }
 
