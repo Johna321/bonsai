@@ -15,6 +15,7 @@
     "esModuleInterop": true,
     "module": "esnext",
     "resolveJsonModule": true,
+    "moduleResolution": "Node",
     "isolatedModules": true,
     "jsx": "preserve"
   },
@@ -22,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/components/BForm.jsx"  ],
   "exclude": [
     "node_modules"
   ]

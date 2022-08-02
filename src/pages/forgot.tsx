@@ -5,6 +5,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 interface IFormInput {
     username: string;
+    code: string;
+    new_password: string;
 }
 
 export default function Forgot() {

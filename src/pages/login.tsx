@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useUser } from "../context/AuthContext.tsx";
+import { useUser } from "../context/AuthContext";
 import { Auth } from "aws-amplify";
 import { CognitoUser } from "@aws-amplify/auth";
 import { useRouter } from "next/router";
@@ -42,7 +42,6 @@ export default function Login() {
 
     return (
         <div className="flex flex-col items-center justify-center w-screen h-screen">
-            <button onClick={() => {setOpen(true); setSignInError("THERES AN ERROR")}}>Open</button>
             <form className="flex flex-col items-center px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md" onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-full mb-4">
                     <div >

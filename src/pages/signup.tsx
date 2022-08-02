@@ -1,34 +1,71 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useUser } from '../context/AuthContext.tsx';
-import { Auth } from "aws-amplify";
+import { useUser } from '../context/AuthContext';
+import { Auth, API, graphqlOperation } from "aws-amplify";
+import { GRAPHQL_AUTH_MODE } from '@aws-amplify/auth';
 import { useRouter } from "next/router";
+import { 
+    createStudent,
+    createTeacher,
+} from "../graphql/mutations";
 
 interface IFormInput {
     username: string;
+    firstName: string;
+    lastName: string;
     email: string;
     password: string;
     role: string;
+    code: string;
 }
 
 export default function Signup() {
-    const { user, setUser } = useUser();
     const [showCode, setShowCode] = useState<boolean>(false);
     const router = useRouter();
 
     const { register, errors, handleSubmit } = useForm<IFormInput>();
     
+    const createUser = async(data: IFormInput) => {
+        const { username, email, firstName, lastName, role } = data;
+        const theUser = await Auth.currentAuthenticatedUser();
+        const userAttributes = await Auth.userAttributes(theUser);
+        console.log(userAttributes[0].Value);
+        const id = userAttributes[0].Value;
+        const newUser = { id, username, email, firstName, lastName };
+        try{
+            if (role === "student"){
+                const createNewUser = await API.graphql({
+                    query: createStudent,
+                    variables: { input: newUser },
+                    authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
+                });
+                console.log(createNewUser);
+            } else {
+                const createNewUser = await API.graphql({
+                    query: createTeacher,
+                    variables: { input: newUser },
+                    authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
+                });
+                console.log(createNewUser);
+            }
+        } catch(err) {
+            console.error("Error creating user: ", err);
+        }
+        router.push('/');
+    };
+    
     const onSubmit: SubmitHandler<IFormInput> = async(data) => {
         try {
             console.log(data);
             if (showCode){
-                confirmSignUp(data);
+                await confirmSignUp(data);
+                createUser(data);
             } else {
                 await signUpWithEmailAndPassword(data);
                 setShowCode(true);
             }
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     };
 
@@ -54,7 +91,6 @@ export default function Signup() {
         try {
             await Auth.confirmSignUp(username, code);
             const amplifyUser = await Auth.signIn(username, password);
-            router.push('/');
             console.log("successfully signed in a user");
         } catch (err) {
             console.log("error confirming sign up", err);
@@ -100,6 +136,29 @@ export default function Signup() {
                     className="w-full px-3 py-2 mb-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                     {...register("email", {
                         required: {value: true, message: "Please enter an e-mail"},
+                    })}
+                />
+                <div >
+                    <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="email">
+                        Name
+                    </label>
+                </div>
+                <input 
+                    id="firstName" 
+                    label="firstName" 
+                    placeholder="First"
+                    className="w-full px-3 py-2 mb-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                    {...register("firstName", {
+                        required: {value: true, message: "Please enter a first name"},
+                    })}
+                />
+                <input 
+                    id="lastName" 
+                    label="lastName" 
+                    placeholder="Last"
+                    className="w-full px-3 py-2 mb-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                    {...register("lastName", {
+                        required: {value: true, message: "Please enter a last name"},
                     })}
                 />
                 <div >
